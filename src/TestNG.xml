@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Sample test suite">
+    <test name="Sample Test Demonstrating testNG flow">
+            <classes>
+              <class name="First" />
+            </classes>
+          </test>
+    <listeners>
+        <listener class-name="TestngSeleniumEventsListener"/>
+    </listeners>
+
+
+</suite>
+
+

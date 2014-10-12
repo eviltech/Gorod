@@ -1,4 +1,6 @@
-import Tests.PageScreenShot;
+package Utils;
+
+import Utils.PageScreenShot;
 import org.testng.*;
 
 import java.io.IOException;
@@ -31,7 +33,18 @@ public class TestngSeleniumEventsListener implements ITestListener, IInvokedMeth
 
      @Override
      public void onTestFailure(ITestResult iTestResult) {
-         PageScreenShot failePageScreenShot = new PageScreenShot(WebDriverStarter.getDriver());
+         WebDriverStarter starter = null;
+         try {
+             starter = new WebDriverStarter();
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+         PageScreenShot failePageScreenShot = null;
+         try {
+             failePageScreenShot = new PageScreenShot(starter.getDriver());
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
          try {
              failePageScreenShot.takeScreenShot(failePageScreenShot.getTimeStampValue());
          } catch (IOException e) {

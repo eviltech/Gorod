@@ -1,15 +1,21 @@
-import Tests.PageScreenShot;
+package Screens;
+
+import Tests.SmokeTest;
+import Utils.LoadPage;
+import Utils.PageScreenShot;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
-import org.testng.Assert;
-
 import java.io.IOException;
-
 
 /**
  * Created by Evil on 27.09.2014.
  */
-public class GorodRegistration {
-    private static WebDriver driver;
+
+public class GorodRegistrationScreen {
+
+    private WebDriver driver;
+    protected static final Logger log = Logger.getLogger(SmokeTest.class);
+
     final static String MAIN_PAGE_REGESTRATION = "//span[@id ='registrationUser']";
     final static String USER_EMAIL = "//input[@id ='user_login']";
     final static String USER_PASS = "//input[@id ='user_password']";
@@ -24,39 +30,37 @@ public class GorodRegistration {
     final static String USER_AVATAR_SAVE = "//div[@class ='button-wr']";
     final static String USER_REGISTRATION_BTN = "//div[@class ='ui-button undefined']";
 
-
-
-    public GorodRegistration(WebDriver driver) throws IOException {
-
+    public GorodRegistrationScreen(WebDriver driver) throws IOException {
+        this.driver = driver;
         PageScreenShot util = new PageScreenShot(driver);
         LoadPage loadPage = new LoadPage();
-
-
-
         driver.get("http://gorod.mos.ru/");
-
-
         loadPage.waitForPageLoaded(driver);
-
-
-
-
-
         System.out.print(String.format("Main Page Registration= %s", MAIN_PAGE_REGESTRATION));
-
-
-
         util.takeScreenShot("IndexPage");
+    }
 
-
-        driver.findElement(By.xpath(MAIN_PAGE_REGESTRATION)).click();
-
+    private GorodRegistrationScreen enterUserEmail() {
+        log.info("Вводим почтовый адрес для нового пользователя");
         driver.findElement(By.xpath(USER_EMAIL)).click();
         driver.findElement(By.xpath(USER_EMAIL)).sendKeys("eviltech86@gmail.com");
+        return this;
+    }
 
+    private GorodRegistrationScreen enterUserPassword() {
+        log.info("Вводим пароль для нового пользователя");
         driver.findElement(By.xpath(USER_PASS)).click();
         driver.findElement(By.xpath(USER_PASS)).sendKeys("11111111");
+        return this;
+    }
 
+    public boolean registrationUser() {
+        driver.findElement(By.xpath(MAIN_PAGE_REGESTRATION)).click();
+
+        enterUserEmail().enterUserPassword();
+
+
+        //TODO Разнести большой метод на маленькие
         driver.findElement(By.xpath(USER_PASS_CONFIRM)).click();
         driver.findElement(By.xpath(USER_PASS_CONFIRM)).sendKeys("11111111");
 
@@ -76,6 +80,10 @@ public class GorodRegistration {
             driver.findElement(By.xpath(CHECK_BOX_CONF2)).click();
         }
 
+        return true;
+    }
+
+        //TODO Создать новые классы скринов (3 скрина) и закинуть туда функционал из этого класса
        /* if ( !driver.findElement(By.xpath(CHECK_BOX_CONF3)).isSelected() )
         {
             driver.findElement(By.xpath(CHECK_BOX_CONF3)).click();

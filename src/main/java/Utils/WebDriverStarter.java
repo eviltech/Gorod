@@ -1,3 +1,5 @@
+package Utils;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -13,7 +15,8 @@ public class WebDriverStarter {
     private static ChromeDriverService service;
     private static WebDriver driver;
     final static String PATH_TO_CHROMEDRIVER = "src//main//resources//chromedriver.exe";
-    public static WebDriver createAndStartService() throws IOException {
+
+    public WebDriverStarter() throws IOException {
         service = new ChromeDriverService.Builder()
                 .usingChromeDriverExecutable(new File(PATH_TO_CHROMEDRIVER))
                 .usingAnyFreePort()
@@ -21,9 +24,12 @@ public class WebDriverStarter {
         service.start();
         driver = new ChromeDriver(service);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        return driver;
     }
-    public static WebDriver getDriver(){
+
+    public WebDriver getDriver() throws IOException {
+        if(driver == null) {
+            new WebDriverStarter();
+        }
         return driver;
     }
 

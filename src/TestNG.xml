@@ -3,11 +3,11 @@
 <suite name="Sample test suite">
     <test name="Sample Test Demonstrating testNG flow">
             <classes>
-              <class name="First" />
+              <class name="Tests.SmokeTest" />
             </classes>
           </test>
     <listeners>
-        <listener class-name="TestngSeleniumEventsListener"/>
+        <listener class-name="Utils.TestngSeleniumEventsListener"/>
     </listeners>
 
 

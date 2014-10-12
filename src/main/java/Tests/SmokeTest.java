@@ -1,5 +1,6 @@
 package Tests;
 
+
 import Screens.GorodRegistrationScreen;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -18,6 +19,9 @@ public class SmokeTest extends BaseTest {
         GorodRegistrationScreen gorodRegistration = new GorodRegistrationScreen(driver);
         Assert.assertEquals(true, true, "");
     }
+
+
+
 
     @AfterClass
     public static void closeDriver() {

@@ -30,6 +30,7 @@ public class GorodRegistrationScreen {
     final static String USER_AVATAR_SAVE = "//div[@class ='button-wr']";
     final static String USER_REGISTRATION_BTN = "//div[@class ='ui-button undefined']";
 
+
     public GorodRegistrationScreen(WebDriver driver) throws IOException {
         this.driver = driver;
         PageScreenShot util = new PageScreenShot(driver);
@@ -54,51 +55,78 @@ public class GorodRegistrationScreen {
         return this;
     }
 
-    public boolean registrationUser() {
-        driver.findElement(By.xpath(MAIN_PAGE_REGESTRATION)).click();
-
-        enterUserEmail().enterUserPassword();
-
-
-        //TODO Разнести большой метод на маленькие
+    private GorodRegistrationScreen enterUserPasswordConfirm(){
+        log.info("Повторяем ввод пароля для нового пользователя");
         driver.findElement(By.xpath(USER_PASS_CONFIRM)).click();
         driver.findElement(By.xpath(USER_PASS_CONFIRM)).sendKeys("11111111");
+        return this;
+    }
 
+    private GorodRegistrationScreen enterUserName(){
+        log.info("Вводим имя пользователя");
         driver.findElement(By.xpath(USER_NAME)).click();
         driver.findElement(By.xpath(USER_NAME)).sendKeys("Test");
+        return this;
+    }
 
+    private GorodRegistrationScreen enterUserSurName(){
+        log.info("Вводим фамилию пользователя");
         driver.findElement(By.xpath(USER_SURNAME)).click();
         driver.findElement(By.xpath(USER_SURNAME)).sendKeys("Prognoz");
+        return this;
+    }
 
+    private GorodRegistrationScreen selectCheckboxUserConfirm(){
+        log.info("Выбираем чекбокс Я согласен(на) с  соглашением о пользовании Порталом");
         if ( !driver.findElement(By.xpath(CHECK_BOX_CONF1)).isSelected() )
         {
             driver.findElement(By.xpath(CHECK_BOX_CONF1)).click();
         }
+        return this;
+    }
 
+    private GorodRegistrationScreen selectUniformRulesOfModeration(){
+        log.info("Выбираем чекбокс ознакомлен(а) с Едиными правилами модерации");
         if ( !driver.findElement(By.xpath(CHECK_BOX_CONF2)).isSelected() )
         {
             driver.findElement(By.xpath(CHECK_BOX_CONF2)).click();
         }
+        return this;
+    }
 
+    private GorodRegistrationScreen selectUserAvatar(){
+        log.info("Выбираем аватар");
+        driver.findElement(By.xpath(USER_AVATAR)).click();
+        return this;
+    }
+
+    private GorodRegistrationScreen selectUserAvatarStep2(){
+        log.info("Выбираем аватар шаг2");
+        driver.findElement(By.xpath(USER_AVATAR_CLICK)).click();
+        return this;
+    }
+
+    private GorodRegistrationScreen saveUserAvatar(){
+        log.info("Сохраняем аватар");
+        driver.findElement(By.xpath(USER_AVATAR_SAVE)).click();
+        return this;
+    }
+
+    private GorodRegistrationScreen registerUser(){
+        log.info("Регистрируем пользователя");
+        driver.findElement(By.xpath(USER_REGISTRATION_BTN)).click();
+        return this;
+    }
+
+    public boolean registrationUser() {
+        driver.findElement(By.xpath(MAIN_PAGE_REGESTRATION)).click();
+
+        enterUserEmail().enterUserPassword().enterUserPasswordConfirm().enterUserName().enterUserSurName()
+                .selectCheckboxUserConfirm().selectUniformRulesOfModeration().selectUserAvatar().selectUserAvatarStep2()
+                .saveUserAvatar().registerUser();
         return true;
     }
-
-        //TODO Создать новые классы скринов (3 скрина) и закинуть туда функционал из этого класса
-       /* if ( !driver.findElement(By.xpath(CHECK_BOX_CONF3)).isSelected() )
-        {
-            driver.findElement(By.xpath(CHECK_BOX_CONF3)).click();
-        }*/
-        driver.findElement(By.xpath(USER_AVATAR)).click();
-        driver.findElement(By.xpath(USER_AVATAR_CLICK)).click();
-        driver.findElement(By.xpath(USER_AVATAR_SAVE)).click();
-
-        driver.findElement(By.xpath(USER_REGISTRATION_BTN)).click();
-
-
-
-
-        //Assert.assertFalse(true);
-    }
-
-
 }
+
+
+

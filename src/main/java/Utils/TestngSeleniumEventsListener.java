@@ -1,6 +1,8 @@
 package Utils;
 
+import Tests.SmokeTest;
 import Utils.PageScreenShot;
+import org.apache.log4j.Logger;
 import org.testng.*;
 
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.io.IOException;
  */
 public class TestngSeleniumEventsListener implements ITestListener, IInvokedMethodListener
  {
+     public static final Logger log = Logger.getLogger(TestngSeleniumEventsListener.class);
 
      @Override
      public void beforeInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
@@ -33,15 +36,10 @@ public class TestngSeleniumEventsListener implements ITestListener, IInvokedMeth
 
      @Override
      public void onTestFailure(ITestResult iTestResult) {
-         WebDriverStarter starter = null;
-         try {
-             starter = new WebDriverStarter();
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
+         log.error( iTestResult.getThrowable().getMessage());
          PageScreenShot failePageScreenShot = null;
          try {
-             failePageScreenShot = new PageScreenShot(starter.getDriver());
+             failePageScreenShot = new PageScreenShot(WebDriverStarter.getDriver());
          } catch (IOException e) {
              e.printStackTrace();
          }
@@ -65,7 +63,7 @@ public class TestngSeleniumEventsListener implements ITestListener, IInvokedMeth
 
      @Override
      public void onStart(ITestContext iTestContext) {
-
+         log.error("");
      }
 
      @Override

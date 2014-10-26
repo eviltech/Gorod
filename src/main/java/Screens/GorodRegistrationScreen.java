@@ -1,6 +1,7 @@
 package Screens;
 
 import Tests.SmokeTest;
+import Utils.DriverWrapper;
 import Utils.LoadPage;
 import Utils.PageScreenShot;
 import org.apache.log4j.Logger;
@@ -12,11 +13,9 @@ import java.io.IOException;
  */
 
 public class GorodRegistrationScreen {
+    DriverWrapper wrapper;
+    public static final Logger log = Logger.getLogger(SmokeTest.class);
 
-    private WebDriver driver;
-    protected static final Logger log = Logger.getLogger(SmokeTest.class);
-
-    final static String MAIN_PAGE_REGESTRATION = "//span[@id ='registrationUser']";
     final static String USER_EMAIL = "//input[@id ='user_login']";
     final static String USER_PASS = "//input[@id ='user_password']";
     final static String USER_PASS_CONFIRM = "//input[@id ='user_password2']";
@@ -29,102 +28,104 @@ public class GorodRegistrationScreen {
     final static String USER_AVATAR_CLICK = "//div[@id ='avatar289']";
     final static String USER_AVATAR_SAVE = "//div[@class ='button-wr']";
     final static String USER_REGISTRATION_BTN = "//div[@class ='ui-button undefined']";
+    final static String REGISTRATION_ACCEPT_POPUP_XPATH = "//div[@id = 'alertContent']";
+    final static String REGISTRATION_ACCEPT_TEXT_XPATH = "//div[@class = 'auth-completed']";
+    final static String REGISTRATION_ACCEPT_BUTTON_XPATH = "//div [text() = 'Хорошо']";
 
 
-    public GorodRegistrationScreen(WebDriver driver) throws IOException {
-        this.driver = driver;
-        PageScreenShot util = new PageScreenShot(driver);
-        LoadPage loadPage = new LoadPage();
-        driver.get("http://gorod.mos.ru/");
-        loadPage.waitForPageLoaded(driver);
-        System.out.print(String.format("Main Page Registration= %s", MAIN_PAGE_REGESTRATION));
-        util.takeScreenShot("IndexPage");
+    GorodRegistrationScreen(WebDriver driver) {
+        wrapper = new DriverWrapper(driver);
     }
+
 
     private GorodRegistrationScreen enterUserEmail() {
         log.info("Вводим почтовый адрес для нового пользователя");
-        driver.findElement(By.xpath(USER_EMAIL)).click();
-        driver.findElement(By.xpath(USER_EMAIL)).sendKeys("eviltech86@gmail.com");
+        wrapper.clickByXpath(USER_EMAIL);//сделать такую обертку для остального в DriwerWrapper
+        wrapper.sendKeysByXpath(USER_EMAIL,"eviltech86@gmail.com");
+
         return this;
     }
 
     private GorodRegistrationScreen enterUserPassword() {
         log.info("Вводим пароль для нового пользователя");
-        driver.findElement(By.xpath(USER_PASS)).click();
-        driver.findElement(By.xpath(USER_PASS)).sendKeys("11111111");
+        wrapper.clickByXpath(USER_PASS);
+        wrapper.sendKeysByXpath(USER_PASS,"11111111");
         return this;
     }
 
     private GorodRegistrationScreen enterUserPasswordConfirm(){
         log.info("Повторяем ввод пароля для нового пользователя");
-        driver.findElement(By.xpath(USER_PASS_CONFIRM)).click();
-        driver.findElement(By.xpath(USER_PASS_CONFIRM)).sendKeys("11111111");
+        wrapper.clickByXpath(USER_PASS_CONFIRM);
+        wrapper.sendKeysByXpath(USER_PASS_CONFIRM,"11111111");
         return this;
     }
 
     private GorodRegistrationScreen enterUserName(){
         log.info("Вводим имя пользователя");
-        driver.findElement(By.xpath(USER_NAME)).click();
-        driver.findElement(By.xpath(USER_NAME)).sendKeys("Test");
+        wrapper.clickByXpath(USER_NAME);
+        wrapper.sendKeysByXpath(USER_NAME,"Test");
         return this;
     }
 
     private GorodRegistrationScreen enterUserSurName(){
         log.info("Вводим фамилию пользователя");
-        driver.findElement(By.xpath(USER_SURNAME)).click();
-        driver.findElement(By.xpath(USER_SURNAME)).sendKeys("Prognoz");
+        wrapper.clickByXpath(USER_SURNAME);
+        wrapper.sendKeysByXpath(USER_SURNAME,"Prognoz");
+
         return this;
     }
 
     private GorodRegistrationScreen selectCheckboxUserConfirm(){
         log.info("Выбираем чекбокс Я согласен(на) с  соглашением о пользовании Порталом");
-        if ( !driver.findElement(By.xpath(CHECK_BOX_CONF1)).isSelected() )
+        if ( !wrapper.isSelectedByXpath(CHECK_BOX_CONF1))
         {
-            driver.findElement(By.xpath(CHECK_BOX_CONF1)).click();
+            wrapper.clickByXpath(CHECK_BOX_CONF1);
         }
         return this;
     }
 
     private GorodRegistrationScreen selectUniformRulesOfModeration(){
         log.info("Выбираем чекбокс ознакомлен(а) с Едиными правилами модерации");
-        if ( !driver.findElement(By.xpath(CHECK_BOX_CONF2)).isSelected() )
+        if ( !wrapper.isSelectedByXpath(CHECK_BOX_CONF2))
         {
-            driver.findElement(By.xpath(CHECK_BOX_CONF2)).click();
+            wrapper.clickByXpath(CHECK_BOX_CONF2);
         }
         return this;
     }
 
     private GorodRegistrationScreen selectUserAvatar(){
         log.info("Выбираем аватар");
-        driver.findElement(By.xpath(USER_AVATAR)).click();
+        wrapper.clickByXpath(USER_AVATAR);
         return this;
     }
 
     private GorodRegistrationScreen selectUserAvatarStep2(){
         log.info("Выбираем аватар шаг2");
-        driver.findElement(By.xpath(USER_AVATAR_CLICK)).click();
+        wrapper.clickByXpath(USER_AVATAR_CLICK);
         return this;
     }
 
     private GorodRegistrationScreen saveUserAvatar(){
         log.info("Сохраняем аватар");
-        driver.findElement(By.xpath(USER_AVATAR_SAVE)).click();
+        wrapper.clickByXpath(USER_AVATAR_SAVE);
         return this;
     }
 
     private GorodRegistrationScreen registerUser(){
         log.info("Регистрируем пользователя");
-        driver.findElement(By.xpath(USER_REGISTRATION_BTN)).click();
+        wrapper.clickByXpath(USER_REGISTRATION_BTN);
         return this;
     }
 
-    public boolean registrationUser() {
-        driver.findElement(By.xpath(MAIN_PAGE_REGESTRATION)).click();
+    public String registrationUser() {
 
         enterUserEmail().enterUserPassword().enterUserPasswordConfirm().enterUserName().enterUserSurName()
                 .selectCheckboxUserConfirm().selectUniformRulesOfModeration().selectUserAvatar().selectUserAvatarStep2()
                 .saveUserAvatar().registerUser();
-        return true;
+        String popupText = wrapper.getTextByXpath(REGISTRATION_ACCEPT_TEXT_XPATH);
+        log.info("Отображается текст в popup " + popupText );
+
+        return popupText;
     }
 }
 

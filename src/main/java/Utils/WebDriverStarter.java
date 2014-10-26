@@ -26,7 +26,7 @@ public class WebDriverStarter {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    public WebDriver getDriver() throws IOException {
+    public static WebDriver getDriver() throws IOException {
         if(driver == null) {
             new WebDriverStarter();
         }

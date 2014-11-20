@@ -17,6 +17,11 @@ public class DriverWrapper {
         this.driver = driver;
     }
 
+    public void findByXpath(String xpath){
+        WebElement element = driver.findElement(By.xpath(xpath));
+        log.info(String.format("Элемент по xpath = %s найден", xpath));
+    }
+
     public void clickByXpath(String xpath){
         WebElement element = driver.findElement(By.xpath(xpath));
         log.info(String.format("Элемент по xpath = %s найден", xpath));
@@ -46,7 +51,22 @@ public class DriverWrapper {
         WebElement element = driver.findElement(By.xpath(xpath));
         log.info(String.format("Элемент по xpath = %s найден", xpath));
         String result = element.getText();
-        log.info(String.format("Элемент c  xpath = %s содержит текст:%s1 ", xpath, result));
+        log.info(String.format("Элемент c  xpath = %s содержит текст: %s1", xpath, result));
         return result;
     }
+
+    public String getPageTitle(){
+        String pageTitle = driver.getTitle();
+        return pageTitle;
+
+    }
+
+    public String getPagelink(String text){
+        WebElement element = driver.findElement(By.linkText(text));
+        log.info(String.format("Элемент по тексту = %s найден", text));
+        String result = element.getText();
+        log.info(String.format("Элемени содержит текст = %s", text));
+        return result;
+    }
+
 }

@@ -3,6 +3,7 @@ package Tests;
 
 
 import Screens.IndexPageErrorScreen;
+import Screens.TypesOutputFormsScreen;
 import Screens.UserDataScreen;
 import Screens.IndexPageScreen;
 import org.testng.Assert;
@@ -23,9 +24,10 @@ public class SmokeTest extends BaseTest {
     final static String Link3 = "Внесение сведений о субъекте";
     final static String LOGIN_ERROR = "Пользователь или пароль некорректен, повторите ввод.";
     final static String BLOCK_ERROR = "Доступ для пользователя временно запрещен.";
+    final static String TYPES_OUTPUT_FORMS_TITLE = "Типы выходных форм";
 
 
-    @Test(priority = 0)
+    @Test(priority = 1)
     public void CheckEnterError() throws IOException, SQLException{
      IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         IndexPageErrorScreen findEnterError = indexPageScreen.getEnterError();
@@ -33,7 +35,7 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(LOGIN_ERROR, errorText, "Текст ошибки не совпадает");
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void CheckBlockError()throws IOException, SQLException{
         log.info("--------------------------------------------------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
@@ -42,7 +44,7 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(BLOCK_ERROR, blockErrorTextx, "Текст ошибки не совпадает");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void CheckTitleUserDataScreen() throws IOException, SQLException {
         log.info("--------------------------------------------------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
@@ -51,7 +53,7 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(REGISTRATION_ACCEPT_TEXT, registerAcceptText, "Текст в Title не совпал с ожидаемым");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void CheckLink1UserDataScreen () throws IOException, SQLException{
         log.info("--------------------------------------------------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
@@ -60,7 +62,7 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(LINK1,myAcceptText,"Текст не совпал с ожидаемым - Просмотр сведений о субъекте");
     }
 
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void CheckLink2UserDataScreen() throws IOException, SQLException{
         log.info("--------------------------------------------------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
@@ -69,13 +71,22 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(LINK2,myAcceptText, "Текст не совпал с ожидаемым - Формирование и печать выходных форм");
     }
 
-    @Test(priority = 5)
+    @Test(priority = 6)
     public void CheckLink3UserDataScreen() throws IOException, SQLException{
         log.info("--------------------------------------------------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         UserDataScreen userDataLink = indexPageScreen.findLinkAddSubjectInfo();
         String myAcceptText = userDataLink.findLinkAddSubjectInfo();
         Assert.assertEquals(Link3, myAcceptText, "Текст не совпал с ожидаемым");
+    }
+
+    @Test(priority = 7)
+    public void CheckTitleTypesOutputForms() throws IOException, SQLException{
+        log.info("--------------------------------------------------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        TypesOutputFormsScreen findTitleTypesOutputForms = indexPageScreen.findTitleTypesOutputForms();
+        String myAcceptText = findTitleTypesOutputForms.findTitleTypesOutputForms();
+        Assert.assertEquals(TYPES_OUTPUT_FORMS_TITLE, myAcceptText,"Текст в Title не совпал с ожидаемым");
     }
 
     @AfterClass

@@ -12,8 +12,12 @@ public class IndexPageErrorScreen {
     DriverWrapper wrapper;
     public static final Logger log = Logger.getLogger(SmokeTest.class);
 
-    final static String MAIN_PAGE_ENTER_ERROR_XPATH = "//div [text() = 'Пользователь или пароль некорректен, повторите ввод.']"; //ДОБАВИТЬ НОРМАЛЬНЫЕ ЛОКАТОРЫ
-    final static String MAIN_PAGE_BLOK_ERROR_XPATH = "//div [text() = 'Доступ для пользователя временно запрещен.']"; //ДОБАВИТЬ НОРМАЛЬНЫЕ ЛОКАТОРЫ
+    final static String MAIN_PAGE_ENTER_ERROR_XPATH = "//div [text() = '\n" +
+            "                                                    Пользователь или пароль некорректен, повторите ввод.\n" +
+            "                                                ']"; //ДОБАВИТЬ НОРМАЛЬНЫЕ ЛОКАТОРЫ
+    final static String MAIN_PAGE_BLOK_ERROR_XPATH = "//div [text() = '\n" +
+            "                                                    Доступ для пользователя временно запрещен.\n" +
+            "                                                ']"; //ДОБАВИТЬ НОРМАЛЬНЫЕ ЛОКАТОРЫ
 
     IndexPageErrorScreen(WebDriver driver) {
         wrapper = new DriverWrapper(driver);

@@ -19,6 +19,8 @@ public class IndexPageScreen {
     final static String MAIN_PAGE_ENTER_LOGIN_XPATH = "//input[@name ='j_username']";
     final static String MAIN_PAGE_ENTER_PASSWORD_XPATH = "//input[@name ='j_password']";
     final static String MAIN_PAGE_ENTER_USER_XPATH = "//input[@id ='ok']";
+    final static String TYPES_OUTPUT_FORMS_TITLE_XPATH = "//a[text()='Формирование и печать выходных\n" +
+            "                                                        форм']";//добавить id или class
 
 
 
@@ -93,6 +95,16 @@ public class IndexPageScreen {
         driver.findElement(By.xpath(MAIN_PAGE_ENTER_USER_XPATH)).click();
         log.info("Вход осуществлен");
         return new UserDataScreen(driver);
+    }
+
+    public TypesOutputFormsScreen findTitleTypesOutputForms(){
+        log.info("Осуществляем вход");
+        driver.findElement(By.xpath(MAIN_PAGE_ENTER_LOGIN_XPATH)).sendKeys("RIKTest");
+        driver.findElement(By.xpath(MAIN_PAGE_ENTER_PASSWORD_XPATH)).sendKeys("test");
+        driver.findElement(By.xpath(MAIN_PAGE_ENTER_USER_XPATH)).click();
+        driver.findElement(By.xpath(TYPES_OUTPUT_FORMS_TITLE_XPATH)).click();
+        log.info("Вход осуществлен");
+        return new TypesOutputFormsScreen(driver);
     }
 
 }

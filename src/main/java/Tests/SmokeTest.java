@@ -2,12 +2,10 @@ package Tests;
 
 
 
-import Screens.IndexPageErrorScreen;
-import Screens.TypesOutputFormsScreen;
-import Screens.UserDataScreen;
-import Screens.IndexPageScreen;
+import Screens.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -25,6 +23,9 @@ public class SmokeTest extends BaseTest {
     final static String LOGIN_ERROR = "Пользователь или пароль некорректен, повторите ввод.";
     final static String BLOCK_ERROR = "Доступ для пользователя временно запрещен.";
     final static String TYPES_OUTPUT_FORMS_TITLE = "Типы выходных форм";
+    final static String SUBJECT_NAME = "Инспекция Министерства по налогам и сборам Республики Беларусь по Россонскому району";
+    final static String MAIN_OBJECT_TAB_TEXT = "Сведения о главном объекте";
+    final static String PART_OBJECT_TAB_TEXT = "Сведения о составной части (принадлежности)";
 
 
     @Test(priority = 1)
@@ -89,8 +90,44 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(TYPES_OUTPUT_FORMS_TITLE, myAcceptText,"Текст в Title не совпал с ожидаемым");
     }
 
+    @Test(priority = 8)
+    public void SearchResultBySubjectName() throws IOException, SQLException{
+        log.info("-------------------------------------------------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FindSubjectScreen searchResultBySubjectname = indexPageScreen.findByEgrNumber();
+        String myAcceptText = searchResultBySubjectname.findByEgrNumber();
+        Assert.assertEquals(SUBJECT_NAME,myAcceptText, "Наименования не совпадают");
+    }
+
+    @Test(priority = 0)
+    public void CheckInformationAboutMainObject() throws IOException,SQLException{
+        log.info("-------------------------------------------------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FormationPrintingOutputFormsRealEstateScreen checkInformationAboutMainObject = indexPageScreen.checkTabInformationAboutMainObject();
+        String myAcceptText = checkInformationAboutMainObject.checkTabInformationAboutMainObject();
+        Assert.assertEquals(MAIN_OBJECT_TAB_TEXT, myAcceptText, "Название вкладок не совпадает");
+    }
+
+    @Test(priority = 9)
+    public void CheckInformationAboutPart() throws IOException,SQLException{
+        log.info("-------------------------------------------------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FormationPrintingOutputFormsRealEstateScreen checkTabInformationAboutPart = indexPageScreen.checkTabInformationAboutPart();
+        String myAcceptText = checkTabInformationAboutPart.checkTabInformationAboutPart();
+        Assert.assertEquals(PART_OBJECT_TAB_TEXT, myAcceptText,"Название вкладок не совпадает");
+    }
+
     @AfterClass
     public static void closeDriver() {
         driver.close();
     }
+
+    @AfterTest
+    public static void CC(){
+        driver.quit();
+    }
+
 }
+
+
+

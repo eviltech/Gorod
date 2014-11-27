@@ -18,6 +18,7 @@ public class TypesOutputFormsScreen {
         wrapper = new DriverWrapper(driver);
 
     }
+
     public String findTitleTypesOutputForms(){
         log.info("Получаем Title страницы");
         String title = wrapper.getPageTitle();

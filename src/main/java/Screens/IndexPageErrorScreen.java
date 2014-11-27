@@ -12,12 +12,9 @@ public class IndexPageErrorScreen {
     DriverWrapper wrapper;
     public static final Logger log = Logger.getLogger(SmokeTest.class);
 
-    final static String MAIN_PAGE_ENTER_ERROR_XPATH = "//div [text() = '\n" +
-            "                                                    Пользователь или пароль некорректен, повторите ввод.\n" +
-            "                                                ']"; //ДОБАВИТЬ НОРМАЛЬНЫЕ ЛОКАТОРЫ
-    final static String MAIN_PAGE_BLOK_ERROR_XPATH = "//div [text() = '\n" +
-            "                                                    Доступ для пользователя временно запрещен.\n" +
-            "                                                ']"; //ДОБАВИТЬ НОРМАЛЬНЫЕ ЛОКАТОРЫ
+
+    final static String MAIN_PAGE_ENTER_ERROR_XPATH = "//div[@id = 'comment1']";
+    final static String MAIN_PAGE_BLOK_ERROR_XPATH = "//div[@id = 'comment2']";
 
     IndexPageErrorScreen(WebDriver driver) {
         wrapper = new DriverWrapper(driver);
@@ -26,14 +23,14 @@ public class IndexPageErrorScreen {
     public String getEnterError(){
         log.info("Получаем ошибку");
         String error = wrapper.getTextByXpath(MAIN_PAGE_ENTER_ERROR_XPATH);
-        log.info("Текст ошибки");
+        log.info("Текст ошибки" + error);
         return error;
     }
 
     public String getBlockError(){
         log.info("Получаем ошибку");
         String blockError = wrapper.getTextByXpath(MAIN_PAGE_BLOK_ERROR_XPATH);
-        log.info("Текст ошибки");
+        log.info("Текст ошибки" + blockError);
         return blockError;
     }
 }

@@ -12,6 +12,12 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class DriverWrapper {
     public static final Logger log = Logger.getLogger(DriverWrapper.class);
     private  WebDriver driver;
+///<summary>
+/// Метод-обертка для чего он...
+///</summary>
+///<author>
+///Дима
+///</author>
 
     public DriverWrapper(WebDriver driver) {
         this.driver = driver;

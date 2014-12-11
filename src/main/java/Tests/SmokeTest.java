@@ -26,6 +26,10 @@ public class SmokeTest extends BaseTest {
     final static String SUBJECT_NAME = "Инспекция Министерства по налогам и сборам Республики Беларусь по Россонскому району";
     final static String MAIN_OBJECT_TAB_TEXT = "Сведения о главном объекте";
     final static String PART_OBJECT_TAB_TEXT = "Сведения о составной части (принадлежности)";
+    final static String TITLE_FOR_MAIN_OBJECT = "Поиск основного объекта";
+    final static String RADIO_BTN_BUILD_FOR_MAIN_OBJECT = "Здание";
+    final static String RADIO_CONSTRUCTION_BUILD_FOR_MAIN_OBJECT = "Сооружение";
+    final static String RADIO_ISOLATEDROOM_BUILD_FOR_MAIN_OBJECT = "Изолированное помещение";
 
 
     @Test(priority = 1)
@@ -99,7 +103,7 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(SUBJECT_NAME,myAcceptText, "Наименования не совпадают");
     }
 
-    @Test(priority = 0)
+    @Test(priority = 9)
     public void CheckInformationAboutMainObject() throws IOException,SQLException{
         log.info("-------------------------------------------------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
@@ -108,7 +112,7 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(MAIN_OBJECT_TAB_TEXT, myAcceptText, "Название вкладок не совпадает");
     }
 
-    @Test(priority = 9)
+    @Test(priority = 10)
     public void CheckInformationAboutPart() throws IOException,SQLException{
         log.info("-------------------------------------------------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
@@ -116,6 +120,44 @@ public class SmokeTest extends BaseTest {
         String myAcceptText = checkTabInformationAboutPart.checkTabInformationAboutPart();
         Assert.assertEquals(PART_OBJECT_TAB_TEXT, myAcceptText,"Название вкладок не совпадает");
     }
+
+    @Test(priority = 11)
+    public void CheckTitleForMainObject() throws IOException, SQLException{
+        log.info("-------------------------------------------------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FormationPrintingOutputFormsRealEstateScreen checkTitleForMainObject =indexPageScreen.checkTitleForMainObject();
+        String myAcceptText = checkTitleForMainObject.checkTitleForMainObject();
+        Assert.assertEquals(TITLE_FOR_MAIN_OBJECT,myAcceptText,"Название title не совпадает");
+    }
+
+    @Test(priority = 12)
+    public void CheckRadioBtnBuildForMainObject() throws IOException, SQLException {
+        log.info("-------------------------------------------------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FormationPrintingOutputFormsRealEstateScreen checkRadioBtnBuildForMainObject = indexPageScreen.checkRadioBtnBuildForMainObject();
+        String myAcceptText = checkRadioBtnBuildForMainObject.checkRadioBtnBuildForMainObject();
+        Assert.assertEquals(RADIO_BTN_BUILD_FOR_MAIN_OBJECT, myAcceptText,"Название radiobtn не совпадает");
+    }
+
+    @Test(priority = 13)
+    public void CheckRadioBtnConstructionForMainObject() throws IOException, SQLException {
+        log.info("-------------------------------------------------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FormationPrintingOutputFormsRealEstateScreen checkRadioBtnConstructionForMainObject = indexPageScreen.checkRadioBtnConstructionForMainObject();
+        String myAcceptText = checkRadioBtnConstructionForMainObject.checkRadioBtnConstructionForMainObject();
+        Assert.assertEquals(RADIO_CONSTRUCTION_BUILD_FOR_MAIN_OBJECT, myAcceptText,"Название radiobtn не совпадает");
+    }
+
+    @Test(priority = 14)
+    public void CheckRadioBtnIsolatedRoomForMainObject() throws IOException, SQLException {
+        log.info("-------------------------------------------------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FormationPrintingOutputFormsRealEstateScreen checkRadioBtnIsolatedRoomForMainObject = indexPageScreen.checkRadioBtnIsolatedRoomForMainObject();
+        String myAcceptText = checkRadioBtnIsolatedRoomForMainObject.checkRadioBtnIsolatedRoomForMainObject();
+        Assert.assertEquals(RADIO_ISOLATEDROOM_BUILD_FOR_MAIN_OBJECT, myAcceptText,"Название radiobtn не совпадает");
+
+    }
+
 
     @AfterClass
     public static void closeDriver() {

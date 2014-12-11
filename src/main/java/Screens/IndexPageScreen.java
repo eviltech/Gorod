@@ -29,6 +29,7 @@ public class IndexPageScreen {
     final static String FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH = "//a[@id = 'el4']";
     final static String FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH = "//input[@value='Формирование и печать выходных форм по объектам недвижимости ']";
     final static String FORM_10_07_XPATH = "//input[@value='Форма 10-07. Сведения об объектах недвижимости и их составных частях (принадлежностях)']";
+    final static String SEARCH_BTN_DATA_OF_MAIN_OBJECT = "//input[@id='mainBuildingSearchButton']";
 
     // Const
     public static final String ВХОД_ОСУЩЕСТВЛЕН = "Вход осуществлен";
@@ -121,19 +122,7 @@ public class IndexPageScreen {
         driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH)).click();
         driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH)).click();
         driver.findElement(By.xpath(FORM_10_07_XPATH)).click();
-
-        //handle windows change
-        String base = driver.getWindowHandle();
-        Set<String> set = driver.getWindowHandles();
-        set.remove(base);
-        assert set.size() == 1;
-        driver.close();
-        driver.switchTo().window((String) set.toArray()[0]);
-
-        //close the window and sitch back to the base tab
-
-//        driver.switchTo().window(base);
-
+        GetTabFocus();
         return new FormationPrintingOutputFormsRealEstateScreen(driver);
     }
 
@@ -143,20 +132,70 @@ public class IndexPageScreen {
         driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH)).click();
         driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH)).click();
         driver.findElement(By.xpath(FORM_10_07_XPATH)).click();
+        GetTabFocus();
+        return new FormationPrintingOutputFormsRealEstateScreen(driver);
+    }
 
 
+    //******************************************************************************************************************
+    public FormationPrintingOutputFormsRealEstateScreen checkTitleForMainObject(){
+        SignIn();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH)).click();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH)).click();
+        driver.findElement(By.xpath(FORM_10_07_XPATH)).click();
+        GetTabFocus();
+        driver.findElement(By.xpath(SEARCH_BTN_DATA_OF_MAIN_OBJECT)).click();
+        return new FormationPrintingOutputFormsRealEstateScreen(driver);
+    }
+
+    //******************************************************************************************************************
+    public FormationPrintingOutputFormsRealEstateScreen checkRadioBtnBuildForMainObject(){
+        SignIn();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH)).click();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH)).click();
+        driver.findElement(By.xpath(FORM_10_07_XPATH)).click();
+        GetTabFocus();
+        driver.findElement(By.xpath(SEARCH_BTN_DATA_OF_MAIN_OBJECT)).click();
+        return new FormationPrintingOutputFormsRealEstateScreen(driver);
+    }
+
+    //******************************************************************************************************************
+    public FormationPrintingOutputFormsRealEstateScreen checkRadioBtnConstructionForMainObject(){
+        SignIn();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH)).click();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH)).click();
+        driver.findElement(By.xpath(FORM_10_07_XPATH)).click();
+        GetTabFocus();
+        driver.findElement(By.xpath(SEARCH_BTN_DATA_OF_MAIN_OBJECT)).click();
+        return new FormationPrintingOutputFormsRealEstateScreen(driver);
+    }
+
+    //******************************************************************************************************************
+    public FormationPrintingOutputFormsRealEstateScreen checkRadioBtnIsolatedRoomForMainObject(){
+        SignIn();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH)).click();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH)).click();
+        driver.findElement(By.xpath(FORM_10_07_XPATH)).click();
+        GetTabFocus();
+        driver.findElement(By.xpath(SEARCH_BTN_DATA_OF_MAIN_OBJECT)).click();
+        return new FormationPrintingOutputFormsRealEstateScreen(driver);
+    }
+
+
+    //Методы
+    //******************************************************************************************************************
+    private void GetTabFocus() {
         //handle windows change
         String base = driver.getWindowHandle();
         Set<String> set = driver.getWindowHandles();
         set.remove(base);
+        driver.close();
         assert set.size() == 1;
         driver.switchTo().window((String) set.toArray()[0]);
 
         //close the window and sitch back to the base tab
-//        driver.close();
-//        driver.switchTo().window(base);
-
-        return new FormationPrintingOutputFormsRealEstateScreen(driver);
+        //driver.close();
+        //driver.switchTo().window(base);
     }
 
     //******************************************************************************************************************

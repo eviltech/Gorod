@@ -50,12 +50,12 @@ public class IndexPageScreen {
     //******************************************************************************************************************
     public IndexPageScreen(WebDriver driver) throws IOException {
         this.driver = driver;
-        PageScreenShot util = new PageScreenShot(driver);
+
         LoadPage loadPage = new LoadPage();
         driver.get(HTTP_NCAERGI_8080);
         loadPage.waitForPageLoaded(driver);
         System.out.print(String.format(MAIN_PAGE_REGISTRATION_S, MAIN_PAGE_ENTER_USER_XPATH));
-        util.takeScreenShot(INDEX_PAGE);
+
     }
 
     //******************************************************************************************************************
@@ -180,6 +180,29 @@ public class IndexPageScreen {
         driver.findElement(By.xpath(SEARCH_BTN_DATA_OF_MAIN_OBJECT)).click();
         return new FormationPrintingOutputFormsRealEstateScreen(driver);
     }
+
+    //******************************************************************************************************************
+    public FormationPrintingOutputFormsRealEstateScreen checkBlockingPart(){
+        SignIn();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH)).click();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH)).click();
+        driver.findElement(By.xpath(FORM_10_07_XPATH)).click();
+        GetTabFocus();
+        driver.findElement(By.xpath(SEARCH_BTN_DATA_OF_MAIN_OBJECT)).click();
+        return new FormationPrintingOutputFormsRealEstateScreen(driver);
+    }
+
+    public FormationPrintingOutputFormsRealEstateScreen checkDataResult(){
+        SignIn();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH)).click();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH)).click();
+        driver.findElement(By.xpath(FORM_10_07_XPATH)).click();
+        GetTabFocus();
+        driver.findElement(By.xpath(SEARCH_BTN_DATA_OF_MAIN_OBJECT)).click();
+        return new FormationPrintingOutputFormsRealEstateScreen(driver);
+    }
+
+
 
 
     //Методы

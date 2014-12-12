@@ -3,6 +3,7 @@ package Tests;
 
 
 import Screens.*;
+import Utils.PageScreenShot;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
@@ -10,6 +11,8 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Evil on 27.09.2014.
@@ -30,11 +33,14 @@ public class SmokeTest extends BaseTest {
     final static String RADIO_BTN_BUILD_FOR_MAIN_OBJECT = "Здание";
     final static String RADIO_CONSTRUCTION_BUILD_FOR_MAIN_OBJECT = "Сооружение";
     final static String RADIO_ISOLATEDROOM_BUILD_FOR_MAIN_OBJECT = "Изолированное помещение";
+    final static String BLOCKING_PART = "DATAOFBLOCKINGPART";
 
 
     @Test(priority = 1)
+
     public void CheckEnterError() throws IOException, SQLException{
-     IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        log.info("----------------------------------ТЕСТ#1-----------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         IndexPageErrorScreen findEnterError = indexPageScreen.getEnterError();
         String errorText = findEnterError.getEnterError();
         Assert.assertEquals(LOGIN_ERROR, errorText, "Текст ошибки не совпадает");
@@ -42,7 +48,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 2)
     public void CheckBlockError()throws IOException, SQLException{
-        log.info("--------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#2-----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         IndexPageErrorScreen findBlockError = indexPageScreen.getBlockError();
         String blockErrorTextx = findBlockError.getBlockError();
@@ -51,7 +57,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 3)
     public void CheckTitleUserDataScreen() throws IOException, SQLException {
-        log.info("--------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#3-----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         UserDataScreen userDataTitle = indexPageScreen.findTitle();
         String registerAcceptText = userDataTitle.findTitle();
@@ -60,7 +66,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 4)
     public void CheckLink1UserDataScreen () throws IOException, SQLException{
-        log.info("--------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#4-----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         UserDataScreen userDataLink = indexPageScreen.findLinkViewSubjectDetails();
         String myAcceptText = userDataLink.findLinkViewSubjectDetails();
@@ -69,7 +75,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 5)
     public void CheckLink2UserDataScreen() throws IOException, SQLException{
-        log.info("--------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#5-----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         UserDataScreen userDataLink = indexPageScreen.findLinkFormatationAndPrintForms();
         String myAcceptText = userDataLink.findLinkFormatationAndPrintForms();
@@ -78,7 +84,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 6)
     public void CheckLink3UserDataScreen() throws IOException, SQLException{
-        log.info("--------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#6-----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         UserDataScreen userDataLink = indexPageScreen.findLinkAddSubjectInfo();
         String myAcceptText = userDataLink.findLinkAddSubjectInfo();
@@ -87,7 +93,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 7)
     public void CheckTitleTypesOutputForms() throws IOException, SQLException{
-        log.info("--------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#7-----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         TypesOutputFormsScreen findTitleTypesOutputForms = indexPageScreen.findTitleTypesOutputForms();
         String myAcceptText = findTitleTypesOutputForms.findTitleTypesOutputForms();
@@ -96,7 +102,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 8)
     public void SearchResultBySubjectName() throws IOException, SQLException{
-        log.info("-------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#8-----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         FindSubjectScreen searchResultBySubjectname = indexPageScreen.findByEgrNumber();
         String myAcceptText = searchResultBySubjectname.findByEgrNumber();
@@ -105,7 +111,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 9)
     public void CheckInformationAboutMainObject() throws IOException,SQLException{
-        log.info("-------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#9-----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         FormationPrintingOutputFormsRealEstateScreen checkInformationAboutMainObject = indexPageScreen.checkTabInformationAboutMainObject();
         String myAcceptText = checkInformationAboutMainObject.checkTabInformationAboutMainObject();
@@ -114,7 +120,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 10)
     public void CheckInformationAboutPart() throws IOException,SQLException{
-        log.info("-------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#10----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         FormationPrintingOutputFormsRealEstateScreen checkTabInformationAboutPart = indexPageScreen.checkTabInformationAboutPart();
         String myAcceptText = checkTabInformationAboutPart.checkTabInformationAboutPart();
@@ -123,7 +129,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 11)
     public void CheckTitleForMainObject() throws IOException, SQLException{
-        log.info("-------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#11----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         FormationPrintingOutputFormsRealEstateScreen checkTitleForMainObject =indexPageScreen.checkTitleForMainObject();
         String myAcceptText = checkTitleForMainObject.checkTitleForMainObject();
@@ -132,7 +138,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 12)
     public void CheckRadioBtnBuildForMainObject() throws IOException, SQLException {
-        log.info("-------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#12----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         FormationPrintingOutputFormsRealEstateScreen checkRadioBtnBuildForMainObject = indexPageScreen.checkRadioBtnBuildForMainObject();
         String myAcceptText = checkRadioBtnBuildForMainObject.checkRadioBtnBuildForMainObject();
@@ -141,7 +147,7 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 13)
     public void CheckRadioBtnConstructionForMainObject() throws IOException, SQLException {
-        log.info("-------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#13----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         FormationPrintingOutputFormsRealEstateScreen checkRadioBtnConstructionForMainObject = indexPageScreen.checkRadioBtnConstructionForMainObject();
         String myAcceptText = checkRadioBtnConstructionForMainObject.checkRadioBtnConstructionForMainObject();
@@ -150,12 +156,37 @@ public class SmokeTest extends BaseTest {
 
     @Test(priority = 14)
     public void CheckRadioBtnIsolatedRoomForMainObject() throws IOException, SQLException {
-        log.info("-------------------------------------------------------------------------------------------------");
+        log.info("----------------------------------ТЕСТ#14----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         FormationPrintingOutputFormsRealEstateScreen checkRadioBtnIsolatedRoomForMainObject = indexPageScreen.checkRadioBtnIsolatedRoomForMainObject();
         String myAcceptText = checkRadioBtnIsolatedRoomForMainObject.checkRadioBtnIsolatedRoomForMainObject();
         Assert.assertEquals(RADIO_ISOLATEDROOM_BUILD_FOR_MAIN_OBJECT, myAcceptText,"Название radiobtn не совпадает");
 
+    }
+
+    @Test(priority = 15)
+    public void CheckBlockingPart() throws IOException, SQLException {
+        log.info("----------------------------------ТЕСТ#15----------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FormationPrintingOutputFormsRealEstateScreen checkBlockingPart = indexPageScreen.checkBlockingPart();
+        checkBlockingPart.checkBlockingPart();
+        PageScreenShot util = new PageScreenShot(driver);
+        util.takeScreenShot(BLOCKING_PART);
+    }
+
+    @Test(priority = 0)
+    public void CheckDataResult() throws IOException, SQLException {
+        log.info("----------------------------------ТЕСТ#16----------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FormationPrintingOutputFormsRealEstateScreen checkDataResult = indexPageScreen.checkDataResult();
+
+        List<String> myResultArr= checkDataResult.checkDataResult();
+        String dataResult = "";
+        for (int i = 0; i < myResultArr.size(); i++) {
+            dataResult = dataResult + myResultArr.get(i) + " ";
+        }
+
+        log.info("ВСЕ ДАННЫЕ МАССИВА resultArraddResultArr: " + dataResult);
     }
 
 

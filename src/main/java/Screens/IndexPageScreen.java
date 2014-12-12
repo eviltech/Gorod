@@ -202,6 +202,17 @@ public class IndexPageScreen {
         return new FormationPrintingOutputFormsRealEstateScreen(driver);
     }
 
+    public TableDataResultForm1007Screen tableResults(){
+        SignIn();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_LINK_XPATH)).click();
+        driver.findElement(By.xpath(FORMATION_PRINT_OUTPUT_FORM_REAL_ESTATE_BTN_XPATH)).click();
+        driver.findElement(By.xpath(FORM_10_07_XPATH)).click();
+        GetTabFocus();
+        driver.findElement(By.xpath(SEARCH_BTN_DATA_OF_MAIN_OBJECT)).click();
+
+        return new TableDataResultForm1007Screen(driver);
+    }
+
 
 
 

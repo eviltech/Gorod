@@ -4,6 +4,7 @@ package Tests;
 
 import Screens.*;
 import Utils.PageScreenShot;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
@@ -174,7 +175,7 @@ public class SmokeTest extends BaseTest {
         util.takeScreenShot(BLOCKING_PART);
     }
 
-    @Test(priority = 0)
+    @Test(priority = 16)
     public void CheckDataResult() throws IOException, SQLException {
         log.info("----------------------------------ТЕСТ#16----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
@@ -187,6 +188,15 @@ public class SmokeTest extends BaseTest {
         }
 
         log.info("ВСЕ ДАННЫЕ МАССИВА resultArraddResultArr: " + dataResult);
+    }
+
+    @Test(priority = 17)
+    public void TableDataResultForm1007Screen() throws IOException, SQLException {
+        log.info("----------------------------------ТЕСТ#17----------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        TableDataResultForm1007Screen tableResults = indexPageScreen.tableResults();
+        List<WebElement> myResultArr = tableResults.tableResults();
+        log.info("ВСЕ ДАННЫЕ МАССИВА myResultArr: " + myResultArr);
     }
 
 

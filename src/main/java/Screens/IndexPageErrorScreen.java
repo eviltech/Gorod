@@ -27,6 +27,7 @@ public class IndexPageErrorScreen {
         return error;
     }
 
+    //******************************************************************************************************************
     public String getBlockError(){
         log.info("Получаем ошибку");
         String blockError = wrapper.getTextByXpath(MAIN_PAGE_BLOK_ERROR_XPATH);

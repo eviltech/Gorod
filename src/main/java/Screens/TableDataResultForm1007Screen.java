@@ -2,6 +2,7 @@ package Screens;
 
 import Tests.SmokeTest;
 import Utils.DriverWrapper;
+import Utils.MyFileWriter;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +16,7 @@ import java.util.List;
 public class TableDataResultForm1007Screen {
     DriverWrapper wrapper;
     public static final Logger log = Logger.getLogger(SmokeTest.class);
+    MyFileWriter mfw = new MyFileWriter();
 
     final static String CLICK_RADIO_BTN_BUILD_FOR_MAIN_OBJECT_XPATH = "//input[@value='2']";
     final static String SEARCH_BTN_XPATH = "//input[@value='Поиск']";
@@ -26,6 +28,7 @@ public class TableDataResultForm1007Screen {
     }
 
     public List<WebElement> tableResults(){
+
         wrapper.clickByXpath(CLICK_RADIO_BTN_BUILD_FOR_MAIN_OBJECT_XPATH);
         wrapper.clickByXpath(SEARCH_BTN_XPATH);
         wrapper.findByXpath(TABLE_RESULTS_XPATH);
@@ -59,9 +62,12 @@ public class TableDataResultForm1007Screen {
             List<WebElement> columns=rows.get(rnum).findElements(By.tagName("td"));
             log.info("Number of columns:"+columns.size());
 
+
             for(int cnum=0;cnum<columns.size();cnum++)
             {
                 log.info(columns.get(cnum).getText());
+                mfw.myFileWriter(columns.get(cnum).getText());
+                System.out.println(mfw);
             }
         }
 

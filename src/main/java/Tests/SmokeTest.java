@@ -190,7 +190,7 @@ public class SmokeTest extends BaseTest {
         log.info("ВСЕ ДАННЫЕ МАССИВА resultArraddResultArr: " + dataResult);
     }
 
-    @Test(priority = 17)
+    @Test(priority = 0)
     public void TableDataResultForm1007Screen() throws IOException, SQLException {
         log.info("----------------------------------ТЕСТ#17----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);

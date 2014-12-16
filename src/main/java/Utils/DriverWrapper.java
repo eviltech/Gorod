@@ -25,6 +25,11 @@ public class DriverWrapper {
         WebElement element = driver.findElement(By.xpath(xpath));
         log.info(String.format("Элемент по xpath = %s найден", xpath));
     }
+    public List<WebElement> findElementsByXpath(String xpath){
+        List<WebElement> elements = driver.findElements(By.xpath(xpath));
+        log.info(String.format("Элемент по xpath = %s найден", xpath));
+        return elements;
+    }
 
     //******************************************************************************************************************
     public void findByTagName(String xpath){
@@ -37,7 +42,6 @@ public class DriverWrapper {
         List<WebElement> elements = driver.findElements(By.tagName(xpath));
         log.info(String.format("Элемент по xpath = %s найден", xpath));
         return elements;
-
     }
 
     //******************************************************************************************************************

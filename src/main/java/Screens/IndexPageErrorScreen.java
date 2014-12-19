@@ -34,4 +34,7 @@ public class IndexPageErrorScreen {
         log.info("Текст ошибки" + blockError);
         return blockError;
     }
+
+
+
 }

@@ -3,6 +3,7 @@ package Tests;
 
 
 import Screens.*;
+import Utils.LoadPage;
 import Utils.PageScreenShot;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -35,6 +36,7 @@ public class SmokeTest extends BaseTest {
     final static String RADIO_CONSTRUCTION_BUILD_FOR_MAIN_OBJECT = "Сооружение";
     final static String RADIO_ISOLATEDROOM_BUILD_FOR_MAIN_OBJECT = "Изолированное помещение";
     final static String BLOCKING_PART = "DATAOFBLOCKINGPART";
+    final static String PRINTING_RESULT = "PRINTINGRESULT ";
 
 
     @Test(priority = 1)
@@ -190,13 +192,25 @@ public class SmokeTest extends BaseTest {
         log.info("ВСЕ ДАННЫЕ МАССИВА resultArraddResultArr: " + dataResult);
     }
 
-    @Test(priority = 0)
+    @Test(priority = 17)
     public void TableDataResultForm1007Screen() throws IOException, SQLException {
         log.info("----------------------------------ТЕСТ#17----------------------------------------------------------");
         IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
         TableDataResultForm1007Screen tableResults = indexPageScreen.tableResults();
         List<WebElement> myResultArr = tableResults.tableResults();
         log.info("ВСЕ ДАННЫЕ МАССИВА myResultArr: " + myResultArr);
+    }
+
+    @Test(priority = 18)
+    public void CheckPrintingResult() throws IOException, SQLException {
+        log.info("----------------------------------ТЕСТ#18----------------------------------------------------------");
+        IndexPageScreen indexPageScreen = new IndexPageScreen(driver);
+        FormationPrintingOutputFormsRealEstateScreen checkPrintingResult = indexPageScreen.checkPrintingResult();
+        checkPrintingResult.checkPrintingResult();
+        PageScreenShot util = new PageScreenShot(driver);
+        LoadPage loadPage = new LoadPage();
+        loadPage.waitForPageLoaded(driver);
+        util.takeScreenShot(PRINTING_RESULT);
     }
 
 
